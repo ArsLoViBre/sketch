@@ -4,6 +4,7 @@ const minusBtn = document.getElementById("decrease");
 const plusBtn = document.getElementById("increase");
 const enterBtn = document.getElementById("enter");
 let gridNum = 16;
+let currentColor = '';  // Variable to keep track of the current color being drawn
 
 // Decrease grid number on touchstart
 minusBtn.addEventListener("touchstart", () => {
@@ -47,16 +48,26 @@ function playRound(gridNum = 16) {
         grid.push(div);
     }
 
-    // Handle drawing on touchmove
+    // Handle drawing on touchstart and touchmove
+    container.addEventListener("touchstart", (e) => {
+        e.preventDefault();  // Prevent scrolling or other touch behaviors
+        currentColor = getRandomColor();  // Set a new random color at the start of touch
+        handleDrawing(e);  // Draw on the initial touch
+    }, { passive: false });
+
     container.addEventListener("touchmove", (e) => {
         e.preventDefault();  // Prevent scrolling or other touch behaviors
+        handleDrawing(e);  // Continue drawing as the finger moves
+    }, { passive: false });
+
+    function handleDrawing(e) {
         const touch = e.touches[0];  // Get the first touch point
         const elementUnderFinger = document.elementFromPoint(touch.clientX, touch.clientY);  // Find the element under the finger
         
-        if (elementUnderFinger && container.contains(elementUnderFinger)) {
-            elementUnderFinger.style.backgroundColor = getRandomColor();
+        if (elementUnderFinger && container.contains(elementUnderFinger) && elementUnderFinger.style.backgroundColor !== currentColor) {
+            elementUnderFinger.style.backgroundColor = currentColor;  // Color only if not already colored
         }
-    }, { passive: false });  // Set passive to false to prevent default touch behavior
+    }
 }
 
 // Initialize the grid when the page loads
