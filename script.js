@@ -42,17 +42,21 @@ function playRound(gridNum = 16) {
     // Create grid items
     for (let i = 1; i <= gridNum * gridNum; i++) {
         let div = document.createElement("div");
-        
-        // Change color on touchmove for touch devices
-        div.addEventListener("touchmove", (e) => {
-            e.target.style.backgroundColor = getRandomColor();
-        });
-
-        // Set attributes and add to container
         div.setAttribute("id", `sqr${i}`);
         container.append(div);
         grid.push(div);
     }
+
+    // Handle drawing on touchmove
+    container.addEventListener("touchmove", (e) => {
+        e.preventDefault();  // Prevent scrolling or other touch behaviors
+        const touch = e.touches[0];  // Get the first touch point
+        const elementUnderFinger = document.elementFromPoint(touch.clientX, touch.clientY);  // Find the element under the finger
+        
+        if (elementUnderFinger && container.contains(elementUnderFinger)) {
+            elementUnderFinger.style.backgroundColor = getRandomColor();
+        }
+    }, { passive: false });  // Set passive to false to prevent default touch behavior
 }
 
 // Initialize the grid when the page loads
