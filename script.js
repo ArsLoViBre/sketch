@@ -11,7 +11,7 @@ minusBtn.addEventListener("click", () => {
     }
 });
 plusBtn.addEventListener("click", () => {
-    if (gridNum < 32) {
+    if (gridNum < 64) {
         gridNum++;
         showGridNum.value = gridNum;
     }
