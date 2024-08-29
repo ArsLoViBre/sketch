@@ -4,7 +4,6 @@ const minusBtn = document.getElementById("decrease");
 const plusBtn = document.getElementById("increase");
 const enterBtn = document.getElementById("enter");
 let gridNum = 16;
-let isCtrlPressed = false;  // Track "Ctrl" state for touch-based toggle
 
 // Decrease grid number on touchstart
 minusBtn.addEventListener("touchstart", () => {
@@ -33,11 +32,6 @@ function playRound(gridNum = 16) {
     container.setAttribute("style", `height: ${gridSize}px; width: ${gridSize}px;`);
     const grid = [];
 
-    // Double-tap to toggle "Ctrl" pressed state
-    container.addEventListener("dblclick", () => {
-        isCtrlPressed = !isCtrlPressed;
-    });
-
     function getRandomColor() {
         function getRandom() {
             return Math.floor(Math.random() * 256);
@@ -49,11 +43,9 @@ function playRound(gridNum = 16) {
     for (let i = 1; i <= gridNum * gridNum; i++) {
         let div = document.createElement("div");
         
-        // Change color on touchmove if "Ctrl" is simulated pressed
+        // Change color on touchmove for touch devices
         div.addEventListener("touchmove", (e) => {
-            if (isCtrlPressed) {
-                e.target.style.backgroundColor = getRandomColor();
-            }
+            e.target.style.backgroundColor = getRandomColor();
         });
 
         // Set attributes and add to container
