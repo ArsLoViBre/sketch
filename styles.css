@@ -1,19 +1,56 @@
+body {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    gap: 40px;
+}
+
 div {
     height: 16px;
     width: 16px;
     padding: 0;
     margin: 0;
-    background-color: lightblue;
     transition: background-color 0.2s, transform 0.2s;
+}
+
+#interface-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    padding: 0;
+    gap: 10px;
 }
 
 #container {
     display: flex;
     flex-flow: row wrap;
-    width: 256px;
-    height: 256px;
-    margin: auto;
     padding: 0;
     border-style: solid;
-    /* background-color: red; */
+    background-color: lightblue;
+}
+
+button {
+    min-width: 40px;
+    height: 40px;
+    text-align: center;
+    margin: 0;
+    padding: 4px;
+    font-size: 24px;
+    flex-grow: 1;
+}
+
+#enter {
+    min-width: 140px;
+}
+
+input {
+    font-size: 24px;
+    padding: 4px;
+    text-align: center;
+    min-width: 50px;
 }
