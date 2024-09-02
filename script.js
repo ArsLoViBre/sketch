@@ -50,6 +50,8 @@ function playRound (gridNum=16) {
         div.addEventListener("mouseover", (e) => {
             if (isCtrlPressed) {
                 e.target.style.backgroundColor = getRandomColor();
+                if (!e.target.style.opacity) e.target.style.opacity = 0.1;
+                e.target.style.opacity = parseFloat(e.target.style.opacity) + 0.1;
             }
         });
         // div.addEventListener("mouseout", (e) => e.target.style.backgroundColor = "lightblue");
@@ -59,4 +61,4 @@ function playRound (gridNum=16) {
     }
 }
 
-window.onload = (e) => reset = playRound(gridNum);
+window.onload = (e) => playRound(gridNum);
